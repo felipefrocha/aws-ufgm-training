@@ -14,6 +14,36 @@
     <name>Demo API</name>
     <description>Demo RDS Postegres 3-tiers AWS</description>
 
+    <profiles>
+        <profile>
+            <id>loc</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <activatedProperties>loc</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>dsv</id>
+            <properties>
+                <activatedProperties>dsv</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>hml</id>
+            <properties>
+                <activatedProperties>hml</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <activatedProperties>prd</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <java.version>11</java.version>
     </properties>

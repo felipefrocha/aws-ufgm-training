@@ -11,6 +11,7 @@ import java.util.Date;
 import static java.util.Collections.emptyList;
 
 public class AuthenticationService {
+
     static final long EXPIRATIONTIME = 864_000_00;
     static final String SIGNINGKEY = "signingKey";
     static final String BEARER_PREFIX = "Bearer";

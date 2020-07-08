@@ -1,0 +1,70 @@
+---
+version: '3.8'
+
+services:
+  db:
+    image: 'postgres'
+    container_name: md4c-db
+    ports:
+      - '5342:5342'
+    volumes:
+      - 'postgres_data:/data'
+    environment:
+      POSTGRES_PASSWORD: password
+    networks:
+      - back-tier
+
+  api:
+    container_name: md4c-api
+    image: md4c-api
+    build:
+      context: './demoapi/'
+      dockerfile: Dockerfile.prod
+    depends_on:
+      - db
+    environment:
+      SPRING_PROFILES_ACTIVE: dsv
+    ports:
+      - '8080:8080'
+    networks:
+      - back-tier
+      - front-tier
+
+  web:
+    container_name: md4c-web
+    image: md4c-web
+    build:
+      context: './demoweb/'
+      dockerfile: Dockerfile
+    env_file:
+     - './demoweb/.env.local'
+    networks:
+      - front-tier
+    depends_on:
+      - db
+      - api
+    ports:
+      - '3001:3000'
+    volumes:
+      - '/app/node_modules'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+
+volumes:
+  postgres_data: {}
+
+networks:
+  back-tier:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.50.0.0/28"
+  front-tier:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.50.0.16/28"
+

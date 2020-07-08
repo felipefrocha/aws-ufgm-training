@@ -4,6 +4,7 @@ import Login from './components/Login'
 
 class App extends Component {
   render() {
+    console.log(process.env.NODE_ENV)
     return (
       <div className="App">
         <header className="App-header">

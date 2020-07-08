@@ -16,7 +16,7 @@ class Currencies extends Component {
   onDelClick = (id) => {
     const jwtToken = sessionStorage.getItem("jwt");
     if (window.confirm('Are you sure to delete currency?')) {
-      fetch('http://172.17.0.3:8080/currencies/' + id, {
+      fetch(`http://${process.env.REACT_APP_HOST_API}:${process.env.REACT_APP_PORT_API}/currencies/` + id, {
         method: 'DELETE',
         headers: new Headers({
           "Authorization": jwtToken,
@@ -29,7 +29,7 @@ class Currencies extends Component {
   
   addCurrency(currency) {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch('http://172.17.0.3:8080/currencies/', {
+    fetch(`http://${process.env.REACT_APP_HOST_API}:${process.env.REACT_APP_PORT_API}/currencies/`, {
       method: 'POST',
       headers: {
         "Authorization": jwtToken,
@@ -43,7 +43,7 @@ class Currencies extends Component {
   
   updateCurrency(currency) {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch('http://172.17.0.3:8080/currencies', {
+    fetch(`http://${process.env.REACT_APP_HOST_API}:${process.env.REACT_APP_PORT_API}/currencies`, {
       method: 'PUT',
       headers: {
         "Authorization": jwtToken,
@@ -116,7 +116,7 @@ class Currencies extends Component {
   
   fetchCurrencies = () => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch('http://172.17.0.3:8080/currencies',
+    fetch(`http://${process.env.REACT_APP_HOST_API}:${process.env.REACT_APP_PORT_API}/currencies`,
       {headers: {"Authorization": jwtToken, "Content-Type": "application/json"}}
     )
       .then((response) => response.json())

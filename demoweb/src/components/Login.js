@@ -10,7 +10,7 @@ class Login extends Component {
   
   login = () => {
     const user = {userName: this.state.username, password: this.state.password};
-    fetch(`http://172.17.0.3:8080/login`, {
+    fetch(`http://${process.env.REACT_APP_HOST_API}:${process.env.REACT_APP_PORT_API}/login`, {
       method: 'POST',
       headers: {"Access-Control-Allow-Origin": "*"},
       body: JSON.stringify(user)
